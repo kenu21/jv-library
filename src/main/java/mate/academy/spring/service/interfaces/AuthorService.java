@@ -11,5 +11,5 @@ public interface AuthorService {
 
     List<Author> findByName(String name);
 
-    List findByNameAndSurname(String name, String surname);
+    List<Author> findByNameAndSurname(String name, String surname);
 }

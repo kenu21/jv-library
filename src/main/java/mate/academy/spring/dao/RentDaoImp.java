@@ -23,8 +23,8 @@ public class RentDaoImp implements RentDao {
 
     @Override
     public List<Rent> listRents() {
-        @SuppressWarnings("unchecked")
-        TypedQuery<Rent> query = sessionFactory.getCurrentSession().createQuery("from Rent");
+        TypedQuery<Rent> query = sessionFactory.getCurrentSession().createQuery(
+                "from Rent", Rent.class);
         return query.getResultList();
     }
 }

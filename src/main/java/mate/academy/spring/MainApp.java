@@ -3,6 +3,7 @@ package mate.academy.spring;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import mate.academy.spring.config.AppConfig;
@@ -28,7 +29,7 @@ public class MainApp {
         bora.setRentBooks(booksMaster);
         List<Author> authorsBulgakov = new ArrayList<>();
         authorsBulgakov.add(bulgakov);
-        master.setAuthors(authorsBulgakov);
+        master.setAuthors(Collections.singletonList(bulgakov));
         bulgakov.setBooks(booksMaster);
         LocalDate localDateBora = LocalDate.now();
         Rent rentBora = new Rent(localDateBora, bora, master);
@@ -51,7 +52,7 @@ public class MainApp {
         miller.setRentBooks(booksZaratustra);
         List<Author> authorsNizshe = new ArrayList<>();
         authorsNizshe.add(nizshe);
-        zaraturstra.setAuthors(authorsNizshe);
+        zaraturstra.setAuthors(Collections.singletonList(nizshe));
         nizshe.setBooks(booksZaratustra);
         LocalDate localDateMiller = LocalDate.now();
         Rent rentMiller = new Rent(localDateMiller, miller, zaraturstra);
@@ -68,7 +69,7 @@ public class MainApp {
         singh.setRentBooks(booksZhizn);
         List<Author> authorsLavey = new ArrayList<>();
         authorsLavey.add(lavey);
-        zhizn.setAuthors(authorsLavey);
+        zhizn.setAuthors(Collections.singletonList(lavey));
         lavey.setBooks(booksZhizn);
         LocalDate localDateSingh = LocalDate.now();
         Rent rentSingh = new Rent(localDateSingh, singh, zhizn);
