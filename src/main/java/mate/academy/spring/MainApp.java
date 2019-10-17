@@ -41,7 +41,7 @@ public class MainApp {
         bookService.add(new Book("Tajnaja Zhizn", 1990, 50.5));
         bookService.add(new Book("Faust", 1808, 150.6));
 
-        // Get Users
+        // Get Books
         List<Book> books = bookService.listBooks();
         for (Book book : books) {
             System.out.println("Id = " + book.getId());
