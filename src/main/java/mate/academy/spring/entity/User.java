@@ -1,19 +1,11 @@
 package mate.academy.spring.entity;
 
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "users")
@@ -32,20 +24,12 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(name = "users_books", joinColumns = {
-            @JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")})
-    private List<Book> rentBooks;
-
     public User() {}
 
-    public User(String name, String surname, String email, List<Book> rentBooks) {
+    public User(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.rentBooks = rentBooks;
     }
 
     public Long getId() {
@@ -78,13 +62,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Book> getRentBooks() {
-        return rentBooks;
-    }
-
-    public void setRentBooks(List<Book> rentBooks) {
-        this.rentBooks = rentBooks;
     }
 }
