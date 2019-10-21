@@ -1,4 +1,4 @@
-package mate.academy.spring.service;
+package mate.academy.spring.service.interfaces;
 
 import java.util.List;
 

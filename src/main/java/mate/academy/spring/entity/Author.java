@@ -1,15 +1,18 @@
 package mate.academy.spring.entity;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "authors")
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,19 +24,19 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "email")
-    private String email;
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER)
+    private List<Book> books;
 
-    public User() {}
-
-    public User(String name, String surname, String email) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-    }
+    public Author() {}
 
     public Long getId() {
         return id;
+    }
+
+    public Author(String name, String surname, List<Book> books) {
+        this.name = name;
+        this.surname = surname;
+        this.books = books;
     }
 
     public void setId(Long id) {
@@ -56,11 +59,11 @@ public class User {
         this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }
