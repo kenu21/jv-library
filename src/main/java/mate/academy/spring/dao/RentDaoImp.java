@@ -24,7 +24,7 @@ public class RentDaoImp implements RentDao {
     @Override
     public List<Rent> listRents() {
         TypedQuery<Rent> query = sessionFactory.getCurrentSession().createQuery(
-                "from Rent", Rent.class);
+                "FROM Rent", Rent.class);
         return query.getResultList();
     }
 }

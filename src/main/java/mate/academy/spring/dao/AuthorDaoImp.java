@@ -24,14 +24,14 @@ public class AuthorDaoImp implements AuthorDao {
     @Override
     public List<Author> listAuthor() {
         TypedQuery<Author> query = sessionFactory.getCurrentSession().createQuery(
-                "from Author", Author.class);
+                "FROM Author", Author.class);
         return query.getResultList();
     }
 
     @Override
     public List<Author> findByName(String name) {
         TypedQuery<Author> query = sessionFactory.getCurrentSession().createQuery(
-                "from Author where name like concat('%',:name,'%')", Author.class);
+                "FROM Author WHERE name LIKE CONCAT('%',:name,'%')", Author.class);
         query.setParameter("name", name);
         return query.getResultList();
     }
@@ -39,8 +39,8 @@ public class AuthorDaoImp implements AuthorDao {
     @Override
     public List<Author> findByNameAndSurname(String name, String surname) {
         TypedQuery<Author> query = sessionFactory.getCurrentSession().createQuery(
-                "from Author where name like concat('%',:name,'%')"
-                        + " and surname like concat('%', :surname,'%')", Author.class);
+                "FROM Author WHERE name LIKE CONCAT('%',:name,'%')"
+                        + " AND surname LIKE CONCAT('%', :surname,'%')", Author.class);
         query.setParameter("name", name);
         query.setParameter("surname", surname);
         return query.getResultList();
