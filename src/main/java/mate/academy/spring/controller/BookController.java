@@ -1,7 +1,8 @@
 package mate.academy.spring.controller;
 
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
+import mate.academy.spring.entity.Book;
 import mate.academy.spring.service.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,11 @@ public class BookController {
 
     @GetMapping("/info")
     public String bookInfo(ModelMap model, @RequestParam Long id) {
-        model.put("infoBook", bookService.get(id).orElseThrow(NoSuchElementException::new));
+        Optional<Book> optionalBook = bookService.get(id);
+        if (optionalBook.isEmpty()) {
+            return "wrong";
+        }
+        model.put("infoBook", optionalBook.get());
         return "bookInfo";
     }
 }
