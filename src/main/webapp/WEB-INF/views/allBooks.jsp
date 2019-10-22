@@ -15,6 +15,7 @@
             <th>Price</th>
             <th>Info</th>
             <th>Authors</th>
+            <th>Rent</th>
         </tr>
         <c:forEach var="book" items="${allBooks}">
             <tr>
@@ -23,9 +24,12 @@
                 <td>${book.year}</td>
                 <td>${book.price}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/book/info?id=${book.id}">Info</a>
+                    <a href="${pageContext.request.contextPath}/book/${book.id}">Info</a>
                 </td>
                 <td>${book.authors}</td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/rent/getbook?book_id=${book.id}">Rent</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

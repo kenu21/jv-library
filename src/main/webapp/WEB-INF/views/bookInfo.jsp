@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
 <head>
@@ -21,6 +20,9 @@
         <td>${infoBook.year}</td>
         <td>${infoBook.price}</td>
         <td>${infoBook.authors}</td>
+        <td>
+            <a href="${pageContext.request.contextPath}/rent/getbook?book_id=${book.id}">Rent</a>
+        </td>
     </tr>
 </table>
 </body>
