@@ -64,7 +64,7 @@ public class RentController {
     }
 
     @GetMapping("/rent")
-    public String returnBook(Model model) {
+    public String rentBooks(Model model) {
         Optional<User> optionalUser = userService.get(USER_ID);
         if (optionalUser.isEmpty()) {
             return "wrong";
