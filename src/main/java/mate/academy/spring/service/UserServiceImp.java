@@ -1,6 +1,7 @@
 package mate.academy.spring.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import mate.academy.spring.dao.interfaces.UserDao;
 import mate.academy.spring.entity.User;
@@ -19,6 +20,12 @@ public class UserServiceImp implements UserService {
     @Override
     public void add(User user) {
         userDao.add(user);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<User> get(Long id) {
+        return userDao.get(id);
     }
 
     @Transactional(readOnly = true)
