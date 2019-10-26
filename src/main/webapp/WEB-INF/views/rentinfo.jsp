@@ -5,6 +5,7 @@
     <title>Rent info</title>
 </head>
 <body>
+<jsp:include page="/index.jsp"/>
 <h2>Rent info</h2>
 <table border="2">
     <tr>

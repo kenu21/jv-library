@@ -4,6 +4,7 @@
     <title>Wrong</title>
 </head>
 <body>
+<jsp:include page="/index.jsp"/>
 <h1>Something went wrong</h1>
 </body>
 </html>

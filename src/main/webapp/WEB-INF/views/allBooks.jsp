@@ -5,6 +5,7 @@
     <title>All books</title>
 </head>
 <body>
+<jsp:include page="/index.jsp"/>
 <div align="center">
     <h2> Select what you want to buy</h2>
     <table border="2">

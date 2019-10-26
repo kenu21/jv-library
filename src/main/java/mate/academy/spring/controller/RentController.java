@@ -1,5 +1,6 @@
 package mate.academy.spring.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/rent")
 public class RentController {
-    public static final Long USER_ID = 1L;
 
     @Autowired
     private RentService rentService;
@@ -31,8 +31,8 @@ public class RentController {
     private BookService bookService;
 
     @GetMapping("/getbook")
-    public String rentBook(@RequestParam("book_id") Long bookId, Model model) {
-        Optional<User> optionalUser = userService.get(USER_ID);
+    public String rentBook(@RequestParam("book_id") Long bookId, Model model, Principal principal) {
+        Optional<User> optionalUser = userService.findByEmail(principal.getName());
         if (optionalUser.isEmpty()) {
             return "wrong";
         }
@@ -48,8 +48,8 @@ public class RentController {
     }
 
     @GetMapping("/returnbook")
-    public String returnBook(@RequestParam("book_id") Long bookId) {
-        Optional<User> optionalUser = userService.get(USER_ID);
+    public String returnBook(@RequestParam("book_id") Long bookId, Principal principal) {
+        Optional<User> optionalUser = userService.findByEmail(principal.getName());
         if (optionalUser.isEmpty()) {
             return "wrong";
         }
@@ -64,8 +64,8 @@ public class RentController {
     }
 
     @GetMapping("/rent")
-    public String rentBooks(Model model) {
-        Optional<User> optionalUser = userService.get(USER_ID);
+    public String rentBooks(Model model, Principal principal) {
+        Optional<User> optionalUser = userService.findByEmail(principal.getName());
         if (optionalUser.isEmpty()) {
             return "wrong";
         }
