@@ -16,6 +16,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Table(name = "users")
 public class User {
+    private static final int LENGTH_FOR_PASSWORD = 5000;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +25,7 @@ public class User {
     @Column(name = "username", unique = true)
     private String username;
 
-    @Column(length = 5000, name = "password")
+    @Column(length = LENGTH_FOR_PASSWORD, name = "password")
     private String password;
 
     @Column(name = "name")
