@@ -3,10 +3,15 @@ package mate.academy.spring.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.PostConstruct;
 
 import mate.academy.spring.entity.Author;
 import mate.academy.spring.entity.Book;
+import mate.academy.spring.entity.Role;
+import mate.academy.spring.entity.User;
 import mate.academy.spring.service.interfaces.BookService;
+import mate.academy.spring.service.interfaces.RoleService;
+import mate.academy.spring.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +23,12 @@ public class InjectController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public String injectData() {
@@ -55,5 +66,20 @@ public class InjectController {
         bookService.add(zhizn);
 
         return "forward:";
+    }
+
+    @PostConstruct
+    public void injectRoleUser() {
+        Role userRole = new Role("ROLE_USER");
+        roleService.add(userRole);
+        Role adminRole = new Role("ROLE_ADMIN");
+        roleService.add(adminRole);
+
+        List<Role> roles = new ArrayList<>();
+        roles.add(userRole);
+        roles.add(adminRole);
+        User admin = new User("admin", "admin", "name", "surname", "bla@bla.bla");
+        admin.setRoles(roles);
+        userService.add(admin);
     }
 }

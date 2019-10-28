@@ -1,5 +1,7 @@
 package mate.academy.spring.service;
 
+import java.util.Optional;
+
 import mate.academy.spring.dao.interfaces.RoleDao;
 import mate.academy.spring.entity.Role;
 import mate.academy.spring.service.interfaces.RoleService;
@@ -17,5 +19,11 @@ public class RoleServiceImp implements RoleService {
     @Override
     public void add(Role role) {
         roleDao.add(role);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Role> getRoleByName(String roleName) {
+        return roleDao.getRoleByName(roleName);
     }
 }

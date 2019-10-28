@@ -1,5 +1,9 @@
 package mate.academy.spring.dao;
 
+import java.util.Optional;
+
+import javax.persistence.TypedQuery;
+
 import mate.academy.spring.dao.interfaces.RoleDao;
 import mate.academy.spring.entity.Role;
 import org.hibernate.SessionFactory;
@@ -15,5 +19,18 @@ public class RoleDaoImp implements RoleDao {
     @Override
     public void add(Role role) {
         sessionFactory.getCurrentSession().save(role);
+    }
+
+    @Override
+    public Optional<Role> getRoleByName(String roleName) {
+        TypedQuery<Role> query = sessionFactory.getCurrentSession().createQuery(
+                "FROM Role WHERE roleName=:roleName", Role.class);
+        query.setParameter("roleName", roleName);
+        try {
+            Role role = query.getSingleResult();
+            return Optional.of(role);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }
