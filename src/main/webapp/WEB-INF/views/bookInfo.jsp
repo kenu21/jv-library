@@ -5,6 +5,7 @@
     <title>Book info</title>
 </head>
 <body>
+<jsp:include page="/index.jsp"/>
 <h2>Book info</h2>
 <table border="2">
     <tr>

@@ -1,19 +1,18 @@
 package mate.academy.spring.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.PostConstruct;
 
-import mate.academy.spring.config.AppConfig;
 import mate.academy.spring.entity.Author;
 import mate.academy.spring.entity.Book;
-import mate.academy.spring.entity.Rent;
+import mate.academy.spring.entity.Role;
 import mate.academy.spring.entity.User;
 import mate.academy.spring.service.interfaces.BookService;
-import mate.academy.spring.service.interfaces.RentService;
+import mate.academy.spring.service.interfaces.RoleService;
 import mate.academy.spring.service.interfaces.UserService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/inject")
 public class InjectController {
+
+    @Autowired
+    private BookService bookService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public String injectData() {
@@ -32,21 +40,8 @@ public class InjectController {
         authorsBulgakov.add(bulgakov);
         master.setAuthors(Collections.singletonList(bulgakov));
         bulgakov.setBooks(booksMaster);
-        LocalDate localDateBora = LocalDate.now();
-        User bora = new User("Sunil", "Bora",
-                "suni.bora@example.com");
-        Rent rentBora = new Rent(localDateBora, bora, master);
 
-        AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(AppConfig.class);
-
-        UserService userService = context.getBean(UserService.class);
-        BookService bookService = context.getBean(BookService.class);
-        RentService rentService = context.getBean(RentService.class);
-
-        userService.add(bora);
         bookService.add(master);
-        rentService.add(rentBora);
 
         Book zaraturstra = new Book("Tak govoril Zaratustra", new ArrayList<Author>(),1883, 200.3);
         Author nizshe = new Author("Fridrih", "Nizshe", new ArrayList<>());
@@ -56,14 +51,8 @@ public class InjectController {
         authorsNizshe.add(nizshe);
         zaraturstra.setAuthors(Collections.singletonList(nizshe));
         nizshe.setBooks(booksZaratustra);
-        LocalDate localDateMiller = LocalDate.now();
-        User miller = new User("David", "Miller",
-                "david.miller@example.com");
-        Rent rentMiller = new Rent(localDateMiller, miller, zaraturstra);
 
-        userService.add(miller);
         bookService.add(zaraturstra);
-        rentService.add(rentMiller);
 
         Book zhizn = new Book("Tajnaja Zhizn", new ArrayList<Author>(),1990, 50.5);
         Author lavey = new Author("Anton", "LaVey", new ArrayList<>());
@@ -73,15 +62,24 @@ public class InjectController {
         authorsLavey.add(lavey);
         zhizn.setAuthors(Collections.singletonList(lavey));
         lavey.setBooks(booksZhizn);
-        LocalDate localDateSingh = LocalDate.now();
-        User singh = new User("Sameer", "Singh",
-                "sameer.singh@example.com");
-        Rent rentSingh = new Rent(localDateSingh, singh, zhizn);
 
-        userService.add(singh);
         bookService.add(zhizn);
-        rentService.add(rentSingh);
 
         return "forward:";
+    }
+
+    @PostConstruct
+    public void injectRoleUser() {
+        Role userRole = new Role("ROLE_USER");
+        roleService.add(userRole);
+        Role adminRole = new Role("ROLE_ADMIN");
+        roleService.add(adminRole);
+
+        List<Role> roles = new ArrayList<>();
+        roles.add(userRole);
+        roles.add(adminRole);
+        User admin = new User("admin", "admin", "name", "surname", "bla@bla.bla");
+        admin.setRoles(roles);
+        userService.add(admin);
     }
 }

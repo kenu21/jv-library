@@ -4,6 +4,7 @@
     <title>Add book</title>
 </head>
 <body>
+<jsp:include page="/index.jsp"/>
 <form action="${pageContext.request.contextPath}/book/add" method="post">
     <table>
         <tr>
@@ -22,8 +23,6 @@
             <td></td>
             <td>
                 <button type="submit">Confirm</button><br>
-                <br>
-                <a href="${pageContext.request.contextPath}/book/">all books</a>
             </td>
         </tr>
     </table>

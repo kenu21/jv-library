@@ -29,7 +29,7 @@ public class MainApp {
         master.setAuthors(Collections.singletonList(bulgakov));
         bulgakov.setBooks(booksMaster);
         LocalDate localDateBora = LocalDate.now();
-        User bora = new User("Sunil", "Bora",
+        User bora = new User("sunil", "Bora", "a", "1",
                 "suni.bora@example.com");
         Rent rentBora = new Rent(localDateBora, bora, master);
 
@@ -53,7 +53,7 @@ public class MainApp {
         zaraturstra.setAuthors(Collections.singletonList(nizshe));
         nizshe.setBooks(booksZaratustra);
         LocalDate localDateMiller = LocalDate.now();
-        User miller = new User("David", "Miller",
+        User miller = new User("david", "Miller", "b", "2",
                 "david.miller@example.com");
         Rent rentMiller = new Rent(localDateMiller, miller, zaraturstra);
 
@@ -70,7 +70,7 @@ public class MainApp {
         zhizn.setAuthors(Collections.singletonList(lavey));
         lavey.setBooks(booksZhizn);
         LocalDate localDateSingh = LocalDate.now();
-        User singh = new User("Sameer", "Singh",
+        User singh = new User("sameer", "Singh", "c", "3",
                 "sameer.singh@example.com");
         Rent rentSingh = new Rent(localDateSingh, singh, zhizn);
 
