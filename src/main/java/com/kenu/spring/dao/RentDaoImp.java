@@ -33,7 +33,7 @@ public class RentDaoImp implements RentDao {
 
     @Override
     public void returnBook(User user, Book book) {
-        Query query = sessionFactory.getCurrentSession()
+        Query<Rent> query = sessionFactory.getCurrentSession()
                 .createQuery("UPDATE Rent rent SET active = false"
                 + " WHERE user_id=:userId AND book_id=:bookId");
         query.setParameter("userId", user.getId());

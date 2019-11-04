@@ -55,6 +55,6 @@ public class BookController {
 
     @GetMapping("/add")
     public String addBookPage() {
-        return "book/create";
+        return "create";
     }
 }
