@@ -73,6 +73,6 @@ public class RentController {
         User user = optionalUser.get();
         List<Book> booksRentByUser = rentService.getBooksRentByUser(user);
         model.addAttribute("rentBooks", booksRentByUser);
-        return "rentinfo";
+        return "rentInfo";
     }
 }
